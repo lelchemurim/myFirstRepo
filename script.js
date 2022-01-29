@@ -1,10 +1,5 @@
-let title = "";
-let screenPrice = "";
-let screens = "";
-let rollback = "";
-let fullPrice = "";
-let adaptive = "";
+let title, screenPrice, screens, rollback, fullPrice, adaptive;
 
-//alert("сообщение с любым текстом");
+alert("сообщение с любым текстом");
 
-console.log("сообщение с любым текстом")
+console.log("сообщение с любым текстом");
