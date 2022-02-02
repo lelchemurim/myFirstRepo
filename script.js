@@ -1,36 +1,67 @@
 
-let title = prompt('Как называется ваш проект?', 'Проект'),
-    screens = prompt('Какие типы экранов нужно разработать? \(Простые, Сложные, Интерактивные\)', 'Простые'),
-    screenPrice = +prompt('Сколько будет стоить данная работа?', '10'),
-    rollback = 10,
-    adaptive = confirm('Нужен ли адаптив на сайте?'),
-    service1 = prompt('Какой дополнительный тип услуги нужен?', 'Дополнительный'),
-    servicePrice1 = +prompt('Сколько это будет стоить?', '10'),
-    service2 = prompt('Какой дополнительный тип услуги нужен?', 'Дополнительный'),
-    servicePrice2 = +prompt('Сколько это будет стоить?', '10'),
+let title,
+    screens,
+    screenPrice,
+    adaptive,
+    service1,
+    servicePrice1,
+    service2,
+    servicePrice2,
     allServicePrices,
-    fullPrice;
+    fullPrice,
+    rollback;
 
-const getAllServicePrices = function (price, price1) {
-    return price + price1;
+const isNumber = function (num) {
+    return !isNaN(parseFloat(num)) && isFinite(num);
 };
-allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
 
-function getFullPrice(price2, price3) {
-    return price2 + price3;
+const asking = function () {
+    title = prompt('Как называется ваш проект?', 'Проект');
+    screens = prompt('Какие типы экранов нужно разработать? \(Простые, Сложные, Интерактивные\)', 'Простые');
+    do {
+        screenPrice = +prompt('Сколько будет стоить данная работа?', 10);
+    } while (!isNumber(screenPrice));
+    adaptive = confirm('Нужен ли адаптив на сайте?');
+};
+
+asking();
+
+const getAllServicePrices = function () {
+    let sum = 0;
+    for (let i = 0; i < 2; i++) {
+        if (i === 0) {
+            servicePrice1 = prompt('Какой дополнительный тип услуги нужен?', 'Дополнительный');
+        } else if (i === 1) {
+            servicePrice2 = prompt('Какой дополнительный тип услуги нужен?', 'Дополнительный');
+        }
+        do {
+            sum += +prompt('Сколько это будет стоить?', 10);
+        } while (!isNumber(sum));
+    }
+    return sum;
+};
+
+allServicePrices = getAllServicePrices();
+
+function getFullPrice() {
+    return screenPrice + allServicePrices;
 }
-fullPrice = getFullPrice(screenPrice, allServicePrices);
+
+rollback = Number('10');
 let percent = fullPrice * (rollback / 100);
+
+console.log(fullPrice);
+
+function getServicePercentPrices(price4, price5) {
+    return Math.ceil(price4 - price5);
+}
+
+let servicePercentPrice = getServicePercentPrices(fullPrice, percent);
 
 function getTitle(a) {
     a = a.trim();
     return a[0].toUpperCase() + a.slice(1).toLowerCase();
 }
-function getServicePercentPrices(price4, price5) {
-    return Math.ceil(price4 - price5);
-};
-
-let servicePercentPrice = getServicePercentPrices(fullPrice, percent);
 
 const getRollbackMessage = function () {
     if (fullPrice >= 300) {
@@ -51,6 +82,7 @@ const showTypeOf = function (variable) {
 showTypeOf(`Значение и тип переменной title: ${getTitle(title)}`);
 showTypeOf(`Значение и тип переменной adaptive: ${adaptive}`);
 showTypeOf(`Значение и тип переменной rollback: ${rollback}`);
+showTypeOf(`Значение и тип переменной percent: ${percent}`);
 
 console.log(`Вывод строки с типами экранов для разработки: ${Array.from([screens])}`);
 console.log(`Cообщение о скидке пользователю: ${getRollbackMessage()}`);
