@@ -26,7 +26,6 @@ function getTitle(a) {
     a = a.trim();
     return a[0].toUpperCase() + a.slice(1).toLowerCase();
 }
-
 function getServicePercentPrices(price4, price5) {
     return Math.ceil(price4 - price5);
 };
@@ -34,8 +33,6 @@ function getServicePercentPrices(price4, price5) {
 let servicePercentPrice = getServicePercentPrices(fullPrice, percent);
 
 const getRollbackMessage = function () {
-    let a = screenPrice;
-    let b = allServicePrices;
     if (fullPrice >= 300) {
         return 'Даем скидку в 10%';
     } else if (fullPrice >= 150 && fullPrice < 300) {
@@ -51,11 +48,11 @@ const showTypeOf = function (variable) {
     console.log(variable, typeof variable);
 };
 
-showTypeOf(`Значение и тип переменной title: ${title}`);
+showTypeOf(`Значение и тип переменной title: ${getTitle(title)}`);
 showTypeOf(`Значение и тип переменной adaptive: ${adaptive}`);
 showTypeOf(`Значение и тип переменной rollback: ${rollback}`);
 
-console.log(`Вывод строки с типами экранов для разработки: ${Array.from(screens)}`);
+console.log(`Вывод строки с типами экранов для разработки: ${Array.from([screens])}`);
 console.log(`Cообщение о скидке пользователю: ${getRollbackMessage()}`);
 console.log(`Cтоимость за вычетом процента отката посреднику: ${servicePercentPrice}`);
 
