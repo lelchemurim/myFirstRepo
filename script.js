@@ -77,12 +77,16 @@ const getRollbackMessage = function () {
 
 const showTypeOf = function (variable) {
     console.log(variable, typeof variable);
+    
+    return {var: variable, type: typeof variable}
 };
 
 showTypeOf(`Значение и тип переменной title: ${getTitle(title)}`);
 showTypeOf(`Значение и тип переменной adaptive: ${adaptive}`);
 showTypeOf(`Значение и тип переменной rollback: ${rollback}`);
 showTypeOf(`Значение и тип переменной percent: ${percent}`);
+
+console.log("Значение и тип переменной title", showTypeOf(title))
 
 console.log(`Вывод строки с типами экранов для разработки: ${Array.from([screens])}`);
 console.log(`Cообщение о скидке пользователю: ${getRollbackMessage()}`);
